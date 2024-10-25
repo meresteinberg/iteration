@@ -49,4 +49,71 @@ z_scores(x= c("my", "name", "is", "jeff"))
 x=3 doesnt work bc cant compute sd of one number (see conditional function added)
 cant do mean of words (also see conditional function we put in for error if !is numeric)
 
+## A new function
+
+```{r}
+mean_and_sd= function(x) {
+  
+  mean_x=mean(x)
+  sd_x=sd(x)
+  
+  out_df=
+    tibble(
+      mean=mean_x,
+      sd=sd_x
+    )
+  
+  return(out_df)
+  
+
+}
+
+mean_and_sd(x_vec)
+```
+
+## Checks stuff using a simulation
+
+```{r}
+sim_df=
+  tibble(
+    x=rnorm(30,10,5)
+  )
+
+sim_df |> 
+  summarize(
+    mean= mean(x),
+    sd= sd(x)
+  )
+```
+
+Simulation function to check sample mean and sd
+
+```{r}
+sim_mean_sd= function(samp_size, true_mean, true_sd) {
+  
+  sim_df=
+  tibble(
+    x=rnorm(samp_size,true_mean,true_sd)
+  )
+
+out_df=
+  sim_df |> 
+  summarize(
+    mean= mean(x),
+    sd= sd(x)
+  )
+
+return(out_df)
+
+}
+sim_mean_sd(samp_size=30, true_mean=4, true_sd=12)
+
+sim_mean_sd(true_mean=4, true_sd=12, samp_size=30)
+
+sim_mean_sd(30,16,2)
+
+```
+can move around arguments if naming them. if not they will go along with how you originally designed the function. you can also name default values in the function().
+
+
 
