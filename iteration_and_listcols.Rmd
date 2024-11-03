@@ -222,7 +222,7 @@ nsduh_df=
     drug=c("marj", "cocaine", "heroin"),
     table_n=c(1,4,5)
   ) |> 
-  mutate(table= map(table_n, \(x) drug_import (html = nsduh_html, table=x)) |> 
+  mutate(table= map(table_n, \(x) drug_import (html = nsduh_html, table=x))) |> 
   unnest(table)
 ```
 unnest will give us the full df so we can see it--now we have a df and can play around with it
