@@ -182,7 +182,23 @@ bday_sim= function(n) {
   
 }
 bday_sim(10)
-
 ```
+
+Run this a lot
+```{r}
+sim_res=
+  expand.grid(
+    n = 2:50,
+    iter= 1:10000
+  ) |> 
+  mutate(res=map_lgl(n, bday_sim)) |> 
+  group_by(n) |> 
+  summarize(prob=mean(res))
+
+sim_res |> 
+  ggplot(aes(x= n, y = prob)) +
+  geom_line()
+```
+
 
 
